@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'android-mapper-object'
+
+    publishedGroupId = 'com.github.gperez88'
+    libraryName = 'AndroidMapperObject'
+    artifact = 'androidMapperObject'
+
+    libraryDescription = 'With AndroidMapperObject you can copy object in other object'
+
+    siteUrl = 'https://github.com/Gperez88/AndroidMapperObject'
+    gitUrl = 'https://github.com/Gperez88/AndroidMapperObject.git'
+    githubRepository= 'Gperez88/AndroidMapperObject'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'gperez88'
+    developerName = 'gabriel perez'
+    developerEmail = 'perezgabriel89@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 24
+        versionCode 1
+        versionName "0.0.1"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
