@@ -1,0 +1,39 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.gperez88' // CREATE A GROUP ID FOR YOUR LIBRARY
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'com.github.gperez88' // CREATE A GROUP ID FOR YOUR LIBRARY
+                artifactId 'androidMapperObject' // THE NAME OF YOUR MODULE
+
+                name 'AndroidMapperObject' // YOUR LIBRARY NAME
+                description 'With AndroidMapperObject you can copy object in other object.' // YOUR LIBRARY DESCRIPTION
+                url 'https://github.com/Gperez88/AndroidMapperObject' // YOUR SITE
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'Gp89Developers' //YOUR ID
+                        name 'Gabriel Perez' //YOUR NAME
+                        email 'perezgabriel89@gmail.com' //YOUR EMAIL
+                    }
+                }
+                scm {
+                    connection 'https://github.com/Gperez88/AndroidMapperObject.git' // YOUR GIT REPO
+                    developerConnection 'https://github.com/Gperez88/AndroidMapperObject.git' // YOUR GIT REPO
+                    url 'https://github.com/Gperez88/AndroidMapperObject' // YOUR SITE
+
+                }
+            }
+        }
+    }
+}
