@@ -6,6 +6,15 @@ It support's :
   - Object to Object data transfer
   - Collection to Collection data transfer
 
+### Usage
+
+#### Add the dependencies to your gradle file:
+```java
+dependencies {
+      compile 'com.github.gperez88:androidMapperObject:0.0.1'
+}
+```
+
 It have two main annotations :
 #### At the class level
 ```java
@@ -16,14 +25,6 @@ It have two main annotations :
 @Mapping(name = "roles", otherType = true)
 //name is is the field name on the other class
 // otherType tells the mapper engine that this field has another mappins inside it.
-```
-### Usage
-
-#### Add the dependencies to your gradle file:
-```java
-dependencies {
-      compile 'com.github.gperez88:androidMapperObject:0.0.1'
-}
 ```
 
 if you need to transfer the data in this class to another one
