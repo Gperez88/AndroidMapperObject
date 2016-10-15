@@ -12,6 +12,12 @@
             <option value="$PROJECT_DIR$/androidMapperObject" />
           </set>
         </option>
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/androidMapperObject" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
