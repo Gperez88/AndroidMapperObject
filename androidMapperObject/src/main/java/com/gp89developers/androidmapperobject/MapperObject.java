@@ -64,8 +64,10 @@ public class MapperObject implements Mapper {
                 toField.setAccessible(true);
                 fromField.setAccessible(true);
 
-                if (backReference != null && backReference.equals(fromField.get(source).getClass()))
+                if (backReference != null && backReference.equals(field.getType())) {
+                    backReference = null;
                     return null;
+                }
 
                 boolean isEqualType = !mapping.otherType();
                 boolean isIterable = !fromField.getType().isPrimitive() && (fromField.get(source) instanceof Collection); //Class.forName(fromField.getType().getName()).equals(List.class)
@@ -90,8 +92,8 @@ public class MapperObject implements Mapper {
                     toField.set(destination, toFieldCollection);
 
                 } else if (isOtherType) {
-                    if (fromField.isAnnotationPresent(BackReference.class))
-                        backReference = fromField.get(source).getClass();
+                    if (field.isAnnotationPresent(BackReference.class))
+                        backReference = field.getType();
 
                     Object value = map(fromField.get(source), toField.getType());
                     toField.set(destination, value);

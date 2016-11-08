@@ -1,7 +1,5 @@
 package com.gp89developers.androidmapperobject.entity;
 
-import com.gp89developers.androidmapperobject.Mapping;
-
 import java.util.List;
 
 /**
@@ -9,11 +7,8 @@ import java.util.List;
  */
 
 public class ParentEntity {
-    @Mapping
     private int id;
-    @Mapping
     private String name;
-    @Mapping
     private List<ChildrenEntity> childrens;
 
     public int getId() {
