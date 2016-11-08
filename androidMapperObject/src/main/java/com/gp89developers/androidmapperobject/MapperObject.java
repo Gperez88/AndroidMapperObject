@@ -17,6 +17,7 @@ import java.util.List;
 public class MapperObject implements Mapper {
     private static MapperObject instance = null;
     private MapperCache<Class, List> mapperCache;
+    private Object backReference;
 
     public static MapperObject getInstance() {
         if (instance == null)
@@ -33,6 +34,9 @@ public class MapperObject implements Mapper {
     public <T> T map(Object source, T destination) {
 
         try {
+
+            if (source == null || destination == null)
+                return null;
 
             List<Field> sourceFields = CollectionUtils.isEmpty(mapperCache.get(source.getClass())) ?
                     getAllDeclaredField(source.getClass()) : mapperCache.get(source.getClass());
@@ -60,6 +64,9 @@ public class MapperObject implements Mapper {
                 toField.setAccessible(true);
                 fromField.setAccessible(true);
 
+                if (backReference != null && backReference.equals(fromField.get(source).getClass()))
+                    return null;
+
                 boolean isEqualType = !mapping.otherType();
                 boolean isIterable = !fromField.getType().isPrimitive() && (fromField.get(source) instanceof Collection); //Class.forName(fromField.getType().getName()).equals(List.class)
                 boolean isOtherType = !isEqualType && !isIterable;
@@ -83,6 +90,9 @@ public class MapperObject implements Mapper {
                     toField.set(destination, toFieldCollection);
 
                 } else if (isOtherType) {
+                    if (fromField.isAnnotationPresent(BackReference.class))
+                        backReference = fromField.get(source).getClass();
+
                     Object value = map(fromField.get(source), toField.getType());
                     toField.set(destination, value);
                 }
@@ -159,7 +169,6 @@ public class MapperObject implements Mapper {
                     Mapping mapping = field.getAnnotation(Mapping.class);
                     if (mapping == null || mapping.name().equals(""))
                         continue;
-
                     if (mapping.name().equals(fieldName))
                         return field;
                 }

@@ -1,7 +1,9 @@
 package com.gp89developers.androidmapperobject;
 
+import com.gp89developers.androidmapperobject.dto.ParentDTO;
 import com.gp89developers.androidmapperobject.dto.RolDTO;
 import com.gp89developers.androidmapperobject.dto.UserDTO;
+import com.gp89developers.androidmapperobject.entity.ParentEntity;
 import com.gp89developers.androidmapperobject.entity.PersonEntity;
 import com.gp89developers.androidmapperobject.entity.RolEntity;
 import com.gp89developers.androidmapperobject.entity.UserEntity;
@@ -9,6 +11,7 @@ import com.gp89developers.androidmapperobject.entity.UserEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -58,6 +61,19 @@ public class TestUtils {
         for (int i = 0; i < rolEntity.size(); i++) {
             assertEquals("user.roles.id not equals", rolEntity.get(i).getId(), rolDTOs.get(i).getId());
             assertEquals("user.roles.name not equals", rolEntity.get(i).getName(), rolDTOs.get(i).getRolName());
+        }
+    }
+
+    public static void parentDataAssertEquals(ParentEntity parentEntityEntity, ParentDTO parentDTO) {
+        assertEquals("parent.id not equals", parentEntityEntity.getId(), parentDTO.getId());
+        assertEquals("parent.name not equals", parentEntityEntity.getName(), parentDTO.getName());
+
+        for (int i = 0; i < parentEntityEntity.getChildrens().size(); i++) {
+            assertEquals("parent.children.id not equals", parentEntityEntity.getChildrens().get(i).getId(), parentDTO.getChildrens().get(i).getId());
+            assertEquals("paren.children.name not equals", parentEntityEntity.getChildrens().get(i).getName(), parentDTO.getChildrens().get(i).getName());
+            assertEquals("paren.children.parent.id not equals", parentEntityEntity.getChildrens().get(i).getParent().getId(), parentDTO.getChildrens().get(i).getParent().getId());
+            assertEquals("paren.children.parent.name not equals", parentEntityEntity.getChildrens().get(i).getParent().getName(), parentDTO.getChildrens().get(i).getParent().getName());
+            assertNull("paren.children.parent.children is not null", parentDTO.getChildrens().get(i).getParent().getChildrens().get(0));
         }
     }
 }

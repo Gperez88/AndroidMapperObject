@@ -1,9 +1,13 @@
 package com.gp89developers.androidmapperobject;
 
+import com.gp89developers.androidmapperobject.dto.ParentDTO;
 import com.gp89developers.androidmapperobject.dto.RolDTO;
 import com.gp89developers.androidmapperobject.dto.UserDTO;
+import com.gp89developers.androidmapperobject.entity.ChildrenEntity;
+import com.gp89developers.androidmapperobject.entity.ParentEntity;
 import com.gp89developers.androidmapperobject.entity.RolEntity;
 import com.gp89developers.androidmapperobject.entity.UserEntity;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,5 +56,30 @@ public class MapperTest {
         roles = new RolDTO().convertDomainList(roleDTOs);
 
         TestUtils.rolesDataAssertEquals(roles, roleDTOs);
+    }
+
+    @Test
+    public void mapperObjectBreakBackReference() {
+        ParentEntity parentEntity = new ParentEntity();
+        parentEntity.setId(1);
+        parentEntity.setName("ParentEntity");
+
+        ChildrenEntity childrenEntity = new ChildrenEntity();
+        childrenEntity.setId(1);
+        childrenEntity.setName("ChildrenEntity");
+        childrenEntity.setParent(parentEntity);
+
+        List<ChildrenEntity> childrenEntities = new ArrayList<>();
+        childrenEntities.add(childrenEntity);
+
+        parentEntity.setChildrens(childrenEntities);
+
+        //Entity to DTO - Using MapperObject
+        Mapper mapperObject = MapperObject.getInstance();
+        ParentDTO parentDTO = mapperObject.map(parentEntity, ParentDTO.class);
+
+        parentEntity = parentDTO.parse();
+
+        TestUtils.parentDataAssertEquals(parentEntity, parentDTO);
     }
 }
