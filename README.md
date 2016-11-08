@@ -1,10 +1,21 @@
 # AndroidMapperObject
 
+  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidMapperObject-green.svg?style=true)](https://android-arsenal.com/details/1/4536)
+
 AndroidMapperObject is an extension the library [MapperObject](https://github.com/Gperez88/MapperObject) which it is a library that allows you to transfer data between two objects.
 
 It support's : 
   - Object to Object data transfer
   - Collection to Collection data transfer
+
+### Usage
+
+#### Add the dependencies to your gradle file:
+```java
+dependencies {
+      compile 'com.github.gperez88:androidMapperObject:0.0.3'
+}
+```
 
 It have two main annotations :
 #### At the class level
@@ -16,14 +27,6 @@ It have two main annotations :
 @Mapping(name = "roles", otherType = true)
 //name is is the field name on the other class
 // otherType tells the mapper engine that this field has another mappins inside it.
-```
-### Usage
-
-#### Add the dependencies to your gradle file:
-```java
-dependencies {
-      compile 'com.github.gperez88:androidMapperObject:0.0.1'
-}
 ```
 
 if you need to transfer the data in this class to another one
@@ -85,7 +88,7 @@ userEntities = new UserDTO().convertDomainList(usersDTO);
 
 ### License
 
-Copyright 2015 Gabriel Perez.
+Copyright 2016 Gabriel Perez.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
