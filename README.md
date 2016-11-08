@@ -7,7 +7,8 @@ AndroidMapperObject is an extension the library [MapperObject](https://github.co
 It support's : 
   - Object to Object data transfer
   - Collection to Collection data transfer
-
+  - Break circular reference
+  
 ### Usage
 
 #### Add the dependencies to your gradle file:
@@ -22,11 +23,16 @@ It have two main annotations :
 ```java
 @EntityMapper
 ```
-#### At the fields level the mapping annotation
+#### At the fields level
+the mapping annotation
 ```java
 @Mapping(name = "roles", otherType = true)
 //name is is the field name on the other class
 // otherType tells the mapper engine that this field has another mappins inside it.
+```
+the break circular reference annotation
+```java
+@BackReference
 ```
 
 if you need to transfer the data in this class to another one
