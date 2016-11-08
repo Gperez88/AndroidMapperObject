@@ -11,7 +11,6 @@ import com.gp89developers.androidmapperobject.entity.UserEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -71,9 +70,6 @@ public class TestUtils {
         for (int i = 0; i < parentEntityEntity.getChildrens().size(); i++) {
             assertEquals("parent.children.id not equals", parentEntityEntity.getChildrens().get(i).getId(), parentDTO.getChildrens().get(i).getId());
             assertEquals("paren.children.name not equals", parentEntityEntity.getChildrens().get(i).getName(), parentDTO.getChildrens().get(i).getName());
-            assertEquals("paren.children.parent.id not equals", parentEntityEntity.getChildrens().get(i).getParent().getId(), parentDTO.getChildrens().get(i).getParent().getId());
-            assertEquals("paren.children.parent.name not equals", parentEntityEntity.getChildrens().get(i).getParent().getName(), parentDTO.getChildrens().get(i).getParent().getName());
-            assertNull("paren.children.parent.children is not null", parentDTO.getChildrens().get(i).getParent().getChildrens().get(0));
-        }
+      }
     }
 }

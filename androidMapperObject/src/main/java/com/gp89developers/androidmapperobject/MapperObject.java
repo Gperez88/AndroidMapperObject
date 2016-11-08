@@ -17,7 +17,6 @@ import java.util.List;
 public class MapperObject implements Mapper {
     private static MapperObject instance = null;
     private MapperCache<Class, List> mapperCache;
-    private Object backReference;
 
     public static MapperObject getInstance() {
         if (instance == null)
@@ -49,6 +48,9 @@ public class MapperObject implements Mapper {
 
             for (Field field : fieldsClassAnnotation) {
 
+                if (field.isAnnotationPresent(BackReference.class))
+                    continue;
+
                 if (!field.isAnnotationPresent(Mapping.class))
                     continue;
 
@@ -63,11 +65,6 @@ public class MapperObject implements Mapper {
 
                 toField.setAccessible(true);
                 fromField.setAccessible(true);
-
-                if (backReference != null && backReference.equals(field.getType())) {
-                    backReference = null;
-                    return null;
-                }
 
                 boolean isEqualType = !mapping.otherType();
                 boolean isIterable = !fromField.getType().isPrimitive() && (fromField.get(source) instanceof Collection); //Class.forName(fromField.getType().getName()).equals(List.class)
@@ -92,9 +89,6 @@ public class MapperObject implements Mapper {
                     toField.set(destination, toFieldCollection);
 
                 } else if (isOtherType) {
-                    if (field.isAnnotationPresent(BackReference.class))
-                        backReference = field.getType();
-
                     Object value = map(fromField.get(source), toField.getType());
                     toField.set(destination, value);
                 }

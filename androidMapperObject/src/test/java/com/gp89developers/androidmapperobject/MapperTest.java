@@ -64,13 +64,16 @@ public class MapperTest {
         parentEntity.setId(1);
         parentEntity.setName("ParentEntity");
 
-        ChildrenEntity childrenEntity = new ChildrenEntity();
-        childrenEntity.setId(1);
-        childrenEntity.setName("ChildrenEntity");
-        childrenEntity.setParent(parentEntity);
-
         List<ChildrenEntity> childrenEntities = new ArrayList<>();
-        childrenEntities.add(childrenEntity);
+
+        for(int i=0;i<10;i++){
+            ChildrenEntity childrenEntity = new ChildrenEntity();
+            childrenEntity.setId(i+1);
+            childrenEntity.setName("ChildrenEntity");
+            childrenEntity.setParent(parentEntity);
+
+            childrenEntities.add(childrenEntity);
+        }
 
         parentEntity.setChildrens(childrenEntities);
 
