@@ -14,7 +14,7 @@ It support's :
 #### Add the dependencies to your gradle file:
 ```java
 dependencies {
-      compile 'com.github.gperez88:androidMapperObject:0.1.0'
+      compile 'com.github.gperez88:androidMapperObject:0.1.1'
 }
 ```
 
